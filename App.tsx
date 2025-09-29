@@ -1,20 +1,68 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import Map from './tabs/map';
+import Home from './tabs/home';
+import Reports from './tabs/reports';
+import AnalyticsScreen from './tabs/analyticsScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName: keyof typeof Ionicons.glyphMap;
+
+            if (route.name === 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Map') {
+              iconName = focused ? 'map' : 'map-outline';
+            } else if (route.name === 'Reports') {
+              iconName = focused ? 'bar-chart' : 'bar-chart-outline';
+            } else if (route.name === 'Analytics') {
+              iconName = focused ? 'analytics' : 'analytics-outline';
+            } else {
+              iconName = 'help-outline';
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#007AFF',
+          tabBarInactiveTintColor: 'gray',
+          headerStyle: {
+            backgroundColor: '#007AFF',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      >
+        <Tab.Screen 
+          name="Home" 
+          component={Home}
+          options={{ title: 'Home' }}
+        />
+        <Tab.Screen 
+          name="Map" 
+          component={Map}
+          options={{ title: 'Map' }}
+        />
+        <Tab.Screen 
+          name="Reports" 
+          component={Reports}
+          options={{ title: 'Reports' }}
+        />
+        <Tab.Screen 
+          name="Analytics" 
+          component={AnalyticsScreen}
+          options={{ title: 'Analytics' }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
