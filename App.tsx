@@ -6,6 +6,7 @@ import Map from './tabs/map';
 import Home from './tabs/home';
 import Reports from './tabs/reports';
 import AnalyticsScreen from './tabs/analyticsScreen';
+import RBIScreen from './tabs/RBIScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +26,8 @@ export default function App() {
               iconName = focused ? 'bar-chart' : 'bar-chart-outline';
             } else if (route.name === 'Analytics') {
               iconName = focused ? 'analytics' : 'analytics-outline';
+            } else if (route.name === 'RBI') {
+              iconName = focused ? 'people' : 'people-outline';
             } else {
               iconName = 'help-outline';
             }
@@ -61,6 +64,11 @@ export default function App() {
           name="Analytics" 
           component={AnalyticsScreen}
           options={{ title: 'Analytics' }}
+        />
+        <Tab.Screen 
+          name="RBI" 
+          component={RBIScreen}
+          options={{ title: 'RBI' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
