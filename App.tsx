@@ -7,6 +7,7 @@ import Home from './tabs/home';
 import Reports from './tabs/reports';
 import AnalyticsScreen from './tabs/analyticsScreen';
 import RBIScreen from './tabs/RBIScreen';
+import VisitorsScreen from './tabs/visitors';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,6 +70,11 @@ export default function App() {
           name="RBI" 
           component={RBIScreen}
           options={{ title: 'RBI' }}
+        />
+        <Tab.Screen 
+          name="Visitors" 
+          component={VisitorsScreen}
+          options={{ title: 'Visitors' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
